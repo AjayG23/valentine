@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" id="navKunjava" class="nav-link">Kunjava</a>
+        <a href="#" id="navSundari" class="nav-link">Sundari</a>
+        <a href="#" id="navCilmanadi" class="nav-link">Cilmanadi</a>
+        <a href="#" id="navFire" class="nav-link">Fire 🔥</a>
+    </nav>
+
+    <div class="stars-container" id="stars"></div>
+    <div class="hearts-container" id="hearts"></div>
+    
+    <main class="main-card">
+        <div class="content">
+            <h1 class="title">Will you be my Valentine?</h1>
+            <div class="buttons">
+                <button id="yesBtn" class="btn btn-yes">Yes</button>
+                <button id="noBtn" class="btn btn-no">No</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Popups -->
+    <div id="popupOverlay" class="overlay">
+        <div id="standardPopup" class="popup">
+            <h2 id="popupText">Are you sure?</h2>
+            <div id="popupButtons" class="popup-buttons">
+                <!-- Buttons will be injected via JS -->
+            </div>
+        </div>
+
+        <div id="slideshowPopup" class="popup portrait-popup">
+            <div class="slideshow-container">
+                <img id="slideshowImage" src="" alt="Romantic Memory" class="slide-image">
+                <div class="caption-container">
+                    <p id="slideshowCaption">Please think about it again, honey.</p>
+                </div>
+                <button class="nav-btn prev-btn" onclick="changeSlide(-1)">&#10094;</button>
+                <button class="nav-btn next-btn" onclick="changeSlide(1)">&#10095;</button>
+            </div>
+            <div class="popup-footer">
+                <span class="remember-text">Remember… think again!</span>
+                <button class="btn btn-yes close-popup">Close</button>
+            </div>
+        </div>
+
+        <div id="sundariPopup" class="popup gallery-popup">
+            <h2>Ente Sundari 💋🤍</h2>
+            <div class="gallery-grid">
+                <img src="images/nee-1.jpg" alt="Sundari 1">
+                <img src="images/nee-2.jpeg" alt="Sundari 2">
+                <img src="images/nee-3.jpg" alt="Sundari 3">
+                <img src="images/nee-4.jpg" alt="Sundari 4">
+                <img src="images/nee-5.jpg" alt="Sundari 5">
+                <img src="images/nee-6.jpg" alt="Sundari 6">
+            </div>
+            <button class="btn btn-yes close-popup" style="margin-top: 20px;">Close</button>
+        </div>
+
+        <div id="cilmanadiPopup" class="popup portrait-popup">
+            <h2>Ente Priyanka Chopra 💋🤍</h2>
+            <div class="slideshow-container">
+                <img src="images/cinema-nadi.jpg" alt="Cinema Nadi" class="slide-image">
+            </div>
+            <button class="btn btn-yes close-popup">Close</button>
+        </div>
+
+        <div id="firePopup" class="popup portrait-popup">
+            <h2 id="fireText">Oh you have lost the fire right......... inna pidicho</h2>
+            <div id="fireAnimationContainer" style="height: 200px; position: relative; overflow: hidden;"></div>
+            <p style="margin-top: 15px; font-style: italic; color: #888;">full kandit poya madhi ne 😌</p>
+        </div>
+
+        <div id="finalPopup" class="popup portrait-popup">
+            <h2 style="font-size: 1.8rem; margin-bottom: 20px;">Yay! Ente Kunjavakk Enne Ishtaa! ❤️</h2>
+            <div class="heart-reveal-container">
+                <img src="images/nammal-2.jpeg" alt="Us" class="heart-reveal-image">
+            </div>
+            <p style="margin-top: 15px; font-size: 1.1rem;">Happy Valentine's Day My Love! 🌹</p>
+            <button id="moodBtn" class="btn btn-yes">Current Mood: 🥰</button>
+        </div>
+
+        <div id="reasonPopup" class="popup">
+            <h2>Tell me, why did you click Yes? 🌹</h2>
+            <div class="input-group" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+                <input type="text" id="reason1" placeholder="Reason 1..." class="romantic-input">
+                <input type="text" id="reason2" placeholder="Reason 2..." class="romantic-input">
+                <input type="text" id="reason3" placeholder="Reason 3..." class="romantic-input">
+            </div>
+            <button class="btn btn-yes" id="sendLetterBtn">Send Love Letter 💌</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
