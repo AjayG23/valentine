@@ -52,6 +52,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const navSundari = document.getElementById('navSundari');
     const navCilmanadi = document.getElementById('navCilmanadi');
     const navFire = document.getElementById('navFire');
+    const navSoulmate = document.getElementById('navSoulmate');
+
+    // Soulmate Scanner Elements
+    const scannerPopup = document.getElementById('scannerPopup');
+    const scannerStatus = document.getElementById('scannerStatus');
+    const scannerProgress = document.getElementById('scannerProgress');
+    const scannerResult = document.getElementById('scannerResult');
+    const scannerCloseBtn = document.getElementById('scannerCloseBtn');
+    const scanLine = document.querySelector('.scan-line');
 
     let currentSlide = 0;
     const slides = [
@@ -90,6 +99,83 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             startFireSequence();
         });
+    }
+
+    if (navSoulmate) {
+        navSoulmate.addEventListener('click', (e) => {
+            e.preventDefault();
+            startScannerSequence();
+        });
+    }
+
+    function startScannerSequence() {
+        showPopup('scanner');
+        scannerStatus.innerText = "Initializing biometric scan...";
+        scannerProgress.style.width = '0%';
+        scannerResult.style.display = 'none';
+        scannerCloseBtn.style.display = 'none';
+        scanLine.style.display = 'block';
+        
+        const scannerImg = document.querySelector('.scanner-image');
+        if (scannerImg) {
+            scannerImg.classList.remove('scanned');
+        }
+
+        // Fast video motion image cycling
+        const scanImages = [
+            "images/image-1.png",
+            "images/image-2.png",
+            "images/image-3.png"
+        ];
+        let imgIdx = 0;
+        scannerImageInterval = setInterval(() => {
+            if (scannerImg) {
+                scannerImg.src = scanImages[imgIdx];
+                imgIdx = (imgIdx + 1) % scanImages.length;
+            }
+        }, 100); // 100ms for fast motion
+
+        const statuses = [
+            { p: 10, t: "Analyzing genetic compatibility..." },
+            { p: 30, t: "Checking vibe levels..." },
+            { p: 50, t: "Confirming heart synchronization..." },
+            { p: 70, t: "Analyzing smile chemistry..." },
+            { p: 90, t: "Almost there, hold still..." },
+            { p: 100, t: "Scan complete!" }
+        ];
+
+        let i = 0;
+        const interval = setInterval(() => {
+            if (i < statuses.length) {
+                scannerProgress.style.width = statuses[i].p + '%';
+                scannerStatus.innerText = statuses[i].t;
+                i++;
+            } else {
+                clearInterval(interval);
+                clearInterval(scannerImageInterval);
+                finishScanner();
+            }
+        }, 600);
+    }
+
+    function finishScanner() {
+        scanLine.style.display = 'none';
+        scannerStatus.innerText = "Processing results...";
+        
+        const scannerImg = document.querySelector('.scanner-image');
+        if (scannerImg) scannerImg.src = "images/image-3.png"; // Lock on the final image
+
+        setTimeout(() => {
+            scannerStatus.innerText = "Warning: Love levels exceeding limits!";
+            if (scannerImg) scannerImg.classList.add('scanned');
+            
+            setTimeout(() => {
+                scannerResult.style.display = 'block';
+                scannerCloseBtn.style.display = 'inline-block';
+                createConfetti(); // Reuse existing confetti
+                createCracker(); // Or reuse cracker for extra spice
+            }, 800);
+        }, 1000);
     }
 
     function startFireSequence() {
@@ -232,6 +318,8 @@ document.addEventListener('DOMContentLoaded', () => {
             firePopup.classList.add('show');
         } else if (type === 'reason') {
             reasonPopup.classList.add('show');
+        } else if (type === 'scanner') {
+            scannerPopup.classList.add('show');
         } else {
             finalPopup.classList.add('show');
             // Add pulse to the final button
@@ -257,6 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (cilmanadiPopup) cilmanadiPopup.classList.remove('show');
             if (firePopup) firePopup.classList.remove('show');
             if (reasonPopup) reasonPopup.classList.remove('show');
+            if (scannerPopup) scannerPopup.classList.remove('show');
         }, 300);
     }
 

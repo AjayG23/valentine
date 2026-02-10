@@ -531,3 +531,81 @@ h1, h2 {
     box-shadow: 0 0 10px rgba(230, 57, 70, 0.2);
     transform: scale(1.02);
 }
+
+/* Soulmate Scanner Styles */
+.scanner-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.scanner-circle {
+    width: 150px;
+    height: 150px;
+    border: 4px solid var(--secondary);
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 179, 193, 0.1);
+    box-shadow: 0 0 20px rgba(255, 179, 193, 0.3);
+}
+
+.scanner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+    filter: grayscale(100%) contrast(150%);
+    transition: all 0.5s ease;
+}
+
+.scanner-image.scanned {
+    opacity: 1;
+    filter: none;
+}
+
+.scan-line {
+    width: 100%;
+    height: 4px;
+    background: var(--primary);
+    position: absolute;
+    top: 0;
+    box-shadow: 0 0 15px var(--primary);
+    animation: scanMove 2s ease-in-out infinite;
+}
+
+@keyframes scanMove {
+    0%, 100% { top: 0; }
+    50% { top: 100%; }
+}
+
+.scanner-status {
+    font-style: italic;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    height: 24px;
+}
+
+.progress-container {
+    width: 100%;
+    height: 10px;
+    background: #eee;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: var(--primary);
+    transition: width 0.1s linear;
+}
+
+.scanner-result {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+    display: none;
+    animation: textPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
