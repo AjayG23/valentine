@@ -148,10 +148,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Growing Yes Logic
+    let yesScale = 1;
+
     // No Button Logic
     noBtn.addEventListener('click', () => {
         noClickCount++;
         
+        // Growing Yes Mechanic
+        yesScale += 0.2;
+        yesBtn.style.transform = `scale(${yesScale})`;
+
+        // Change No Button Text
+        const noTexts = ["Are you sure?", "Really?", "Think again!", "Last chance!", "Surely not?", "You might regret this!"];
+        if (noClickCount <= noTexts.length) {
+            noBtn.innerText = noTexts[noClickCount - 1];
+        } else {
+            noBtn.innerText = "Just click Yes!";
+        }
+
         if (noClickCount === 1) {
             updatePopupButtons();
             popupText.innerText = "Are you sure? 🥺";
@@ -163,11 +178,16 @@ document.addEventListener('DOMContentLoaded', () => {
             // Apply shake to the popup itself when it shows
             standardPopup.classList.add('shake');
             setTimeout(() => standardPopup.classList.remove('shake'), 600);
-        } else if (teaseCount >= MAX_TEASES) {
-            // After teasing is done, show slideshow popup
+        } else if (noClickCount === 3) {
+            // Explicitly show slideshow on 3rd click
             currentSlide = 0;
             updateSlide();
             showPopup('slideshow');
+        } else if (noClickCount > 3) {
+             // For subsequent clicks, keep showing slideshow or just grow button huge
+             // If we want to force Yes, we can make it huge
+             yesScale += 0.5; // Grow faster
+             yesBtn.style.transform = `scale(${yesScale})`;
         }
     });
 
